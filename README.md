@@ -5,12 +5,28 @@
 
 ```
 myeclipse8.5
-tomcat6
-jdk1.8.0201
+导入mye就可以跑，
+此时的mye工作区间的全都是默认设置，删掉工作区间的.metadata文件夹，就会全部恢复默认设置
+```
+```
+这里可以完全不用改，同样可以跑成功，没有任何问题
+
+tomcat就用myeclipse自带的就可以，就是打开就在servers标签里就有的，我这里叫MyEclipse Tomcat
+jdk就用myeclipse自带的就可以，我这里默认是Sun JDK 1.6.0_13
+
+集成沙盒Integrated Sandbox
+mye自带的tomcat配置处（Preferences -> MyEclipse -> Servers -> Integrated Sandbox -> MyEclipse Tomcat 6）
+mye自带的jdk配置处（Preferences -> MyEclipse -> Servers -> Integrated Sandbox -> MyEclipse Tomcat 6 -> JDK）
+
+也可以配置自己的tomcat和jdk
 配置tomcat（Preferences -> MyEclipse -> Servers -> Tomcat -> Tomcat 6.x）
 配置jdk（Preferences -> MyEclipse -> Servers -> Tomcat -> Tomcat 6.x -> JDK）
+```
 
-由于git不允许上传空文件夹，导入myeclipse的时候，自行在根目录下创建一个src目录
+```
+注意事项：
+偶发：由于git不允许上传空文件夹，导入myeclipse的时候，自行在根目录下创建一个src目录
+如果配置自己的tomcat和jdk,确保使用的tomcat和jdk都是64位的，如果位数不同，会报错！
 ```
 
 ## 访问路径
