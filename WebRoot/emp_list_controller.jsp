@@ -46,7 +46,6 @@ public static final String DBPASSWORD = "orcl" ;
 	}
 %>
 <%
-	
 	//mysql的分页，要的是行号和要查询的行数，一个初始行号,从0开始，一个行数，即页面大小
 	List<HashMap<String,String>> dataList = new ArrayList<HashMap<String,String>>();
 	String dataSql = "select empno,ename,job,hiredate,sal,comm from emp where 1=1 ";
