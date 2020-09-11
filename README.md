@@ -10,16 +10,14 @@ jdk1.8.0201
 配置tomcat（Preferences -> MyEclipse -> Servers -> Tomcat -> Tomcat 6.x）
 配置jdk（Preferences -> MyEclipse -> Servers -> Tomcat -> Tomcat 6.x -> JDK）
 
-
-
-连接oracle数据库，把连oracle数据库的jar包，放到tomcat的lib目录下
-连接mysql数据库，把连mysql数据库的jar包，放到tomcat的lib目录下
-
 由于git不允许上传空文件夹，导入myeclipse的时候，自行在根目录下创建一个src目录
 ```
 
 ## 访问路径
+
+```
 http://localhost:8080/fenye/emp_list_controller.jsp
+```
 
 
 ## 功能
