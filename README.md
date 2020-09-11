@@ -22,7 +22,9 @@ http://localhost:8080/fenye/emp_list_controller.jsp
 
 ## 功能
 
+```
 有分页组件，有模糊查询，可以连oracle，可以连mysql
+```
 
 
 ## sql脚本如下
