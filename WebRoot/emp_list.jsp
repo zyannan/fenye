@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.List,java.util.ArrayList,java.util.Map,java.util.HashMap" %>
 <html>
-<head><title>front</title>
+<head><title>Ç°¶Ë</title>
 <style type="text/css">
 .tablecontent{width:60%; border-collapse:collapse;}
 .tablecontent td{padding:5px; font-size:12px; text-align:center;border-bottom:1px solid #e0e0e0;}
