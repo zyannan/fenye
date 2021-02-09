@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.List,java.util.ArrayList,java.util.Map,java.util.HashMap" %>
 <html>
-<head><title>前台</title>
+<head><title>front</title>
 <style type="text/css">
 .tablecontent{width:60%; border-collapse:collapse;}
 .tablecontent td{padding:5px; font-size:12px; text-align:center;border-bottom:1px solid #e0e0e0;}
@@ -12,7 +12,7 @@
 </style>
 <script language="javascript">
 	function query(){
-		//向后台传cp、ps、kw
+		//向后台传cp、ps
 		document.spform.submit() ;	 
 	}
 </script>
@@ -21,32 +21,12 @@
 <%
 int cp = Integer.parseInt(request.getParameter("cp")) ;
 int ps = Integer.parseInt(request.getParameter("ps")) ;
-String kw = request.getParameter("kw");
 int count = Integer.parseInt(request.getParameter("count")) ;
 List<HashMap<String,String>> dataList = (List<HashMap<String,String>>)request.getAttribute("dataList");
 %>
    <center> 
 	<h1>雇员列表</h1>
 	<form name="spform" action="emp_list_controller.jsp" method="post">
-	<div class="sreach">
-	<table>
-		<tr>
-			<td>
-				<div align="right">
-					姓名：
-				</div>
-			</td>
-			<td>
-				<div align="left">
-					<input type="text" name="kw" value="<%=kw%>">
-				</div>
-			</td>
-			<td>
-				<input type="submit" value="查询"> 
-			</td>
-		</tr>
-	</table>
-	</div>
 	<table class="tablecontent">
 		<thead>
 			<tr>

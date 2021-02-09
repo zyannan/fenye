@@ -1,83 +1,76 @@
 <%@ page contentType="text/html" pageEncoding="GBK"%>
 <%@ page import="java.sql.*" %>
-<%@ page import="java.util.List,java.util.ArrayList,java.util.Map,java.util.HashMap" %>
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.List,java.util.ArrayList,java.util.Map,java.util.HashMap,java.util.Properties" %>
 <html>
-<head><title>服务端</title>
+<head><title>后端</title>
 </head>
 <body>
-<%!
-public static final String DBDRIVER = "com.mysql.jdbc.Driver" ;
-public static final String DBURL = "jdbc:mysql://localhost/fenye" ;
-public static final String DBUSER = "root" ;
-public static final String DBPASSWORD = "root" ;
-%>
-<%--!
-public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;
-public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:orcl" ;
-public static final String DBUSER = "scott" ;
-public static final String DBPASSWORD = "orcl" ;
---%>
+
 <%
-//后台
-//接收前台的cp、ps、kw
-//返回给前台的cp、ps、kw、count、dataList
+	//接收前台的cp、ps
 	int cp = Integer.parseInt(request.getParameter("cp")==null?"1":request.getParameter("cp")) ;
-	int ps = Integer.parseInt(request.getParameter("ps")==null?"5":request.getParameter("ps")) ;
-	String kw = request.getParameter("kw")==null?"":request.getParameter("kw");
+	int ps = Integer.parseInt(request.getParameter("ps")==null?"3":request.getParameter("ps")) ;
+
+
+	Properties pro = new Properties();  
+	String realpath = request.getRealPath("/");  
+	FileInputStream in = new FileInputStream(realpath+"/application.properties");  
+	pro.load(in);  
 	
+	String dburl = pro.getProperty("dburl"); 
+	String username = pro.getProperty("username"); 
+	String password = pro.getProperty("password"); 
+	String driver = pro.getProperty("driver"); 
+
 	Connection conn = null ;
 	PreparedStatement pstmt = null ;
 	ResultSet rs = null ;
 	
-	Class.forName(DBDRIVER) ;
-	conn = DriverManager.getConnection(DBURL,DBUSER,DBPASSWORD) ;
+	Class.forName(driver) ;
+	conn = DriverManager.getConnection(dburl,username,password) ;
 	
-	int count=0;
+	Integer count= null;
 	String countSql = "SELECT COUNT(empno) FROM emp where 1=1 " ;
-	if(kw!=null && !kw.equals("")){
-		kw =kw.trim();
-		countSql += " and upper(ename) like  upper('%"+kw+"%')";
-	}
-	System.out.println(countSql);
 	pstmt = conn.prepareStatement(countSql) ;
 	rs = pstmt.executeQuery() ;
 	if(rs.next()){	
 		count = rs.getInt(1) ;
 	}
-%>
-<%
-	//mysql的分页，要的是行号和要查询的行数，一个初始行号,从0开始，一个行数，即页面大小
+	System.out.println(countSql);
+
 	List<HashMap<String,String>> dataList = new ArrayList<HashMap<String,String>>();
-	String dataSql = "select empno,ename,job,hiredate,sal,comm from emp where 1=1 ";
-	if(kw!=null && !kw.equals("")){
-		kw =kw.trim();
-		dataSql += " and upper(ename) like upper('%"+kw+"%')";
+	
+	String dataSql = null;
+	Integer param1 = null;
+	Integer param2 = null;
+	if(dburl.contains("mysql")){
+		//mysql分页sql
+		dataSql = "select empno,ename,job,hiredate,sal,comm from emp where 1=1";
+		dataSql += " limit ?,?";
+		param1 = (cp-1) * ps;
+		param2 = ps;
 	}
-	dataSql += " limit ?,?";
+	if(dburl.contains("oracle")){
+		//oracle分页sql 
+		dataSql = 	"SELECT * FROM (" + 
+		" SELECT empno,ename,job,hiredate,sal,comm,ROWNUM rn" +
+		" FROM emp WHERE ROWNUM<=?";
+		dataSql += 
+		" ORDER BY empno ) temp" + 
+		" WHERE temp.rn>?" ;
+		param1 = cp * ps;
+		param2 = (cp-1) * ps;
+	}
 	pstmt = conn.prepareStatement(dataSql) ;
-	pstmt.setInt(1,(cp-1) * ps) ;
-	pstmt.setInt(2, ps) ;
+	pstmt.setInt(1,param1) ;
+	pstmt.setInt(2,param2) ;
 	rs = pstmt.executeQuery() ;
-%>
-<%--
-	//oracle的分页，是要的2个行号，一个初始行号，从1开始，一个结束行号
-	List<HashMap<String,String>> dataList = new ArrayList<HashMap<String,String>>();
-	String dataSql = 	"SELECT * FROM (	" + 
-	" SELECT empno,ename,job,hiredate,sal,comm,ROWNUM rn " +
-	" FROM emp WHERE ROWNUM<=? ";
-	if(kw!=null && !kw.equals("")){
-		kw =kw.trim();
-		dataSql += " and upper(ename) like upper('%"+kw+"%')";
-	}
-	dataSql += 
-	" ORDER BY empno) temp " + 
-	" WHERE temp.rn>? " ;
-	pstmt = conn.prepareStatement(dataSql) ;
-	pstmt.setInt(1,cp * ps) ;
-	pstmt.setInt(2,(cp-1) * ps) ;
-	rs = pstmt.executeQuery() ;	
---%>	
-<%	
+	
+	dataSql= dataSql.replace("?","%d");
+	dataSql= String.format(dataSql,param1,param2);
+	System.out.println(dataSql);
+
 	while(rs.next()){
 		HashMap<String,String> map = new HashMap<String,String>();
 		int empno = rs.getInt(1) ;
@@ -96,8 +89,9 @@ public static final String DBPASSWORD = "orcl" ;
 	}
 	conn.close() ;	
 	
+	//返回给前台的cp、ps、count、dataList
 	request.setAttribute("dataList",dataList);
-	String url = "emp_list.jsp?cp="+cp+"&ps="+ps+"&kw="+kw+"&count="+count;
+	String url = "emp_list.jsp?cp="+cp+"&ps="+ps+"&count="+count;
 	request.getRequestDispatcher(url).forward(request,response);
 %>
 </body>

@@ -5,30 +5,29 @@
 
 ```
 myeclipse8.5
-导入mye就可以跑，
-此时的mye工作区间的全都是默认设置，删掉工作区间的.metadata文件夹，就会全部恢复默认设置
+导入mye就可以跑
 ```
-```
-这里可以完全不用改，同样可以跑成功，没有任何问题
 
+```
 tomcat就用myeclipse自带的就可以，就是打开就在servers标签里就有的，我这里叫MyEclipse Tomcat
 jdk就用myeclipse自带的就可以，我这里默认是Sun JDK 1.6.0_13
+```
 
-集成沙盒Integrated Sandbox
-mye自带的tomcat配置处（Preferences -> MyEclipse -> Servers -> Integrated Sandbox -> MyEclipse Tomcat 6）servers标签右键Configure Server Connector可以直接到达
-mye自带的jdk配置处（Preferences -> MyEclipse -> Servers -> Integrated Sandbox -> MyEclipse Tomcat 6 -> JDK）
+## 其他信息
+```
+参考自 /李兴华/魔乐JAVAWEB实战经典高级篇/060502_〖第05章：JSP基础语法〗_第02题
+部分样式参考自，金币交易系统
+```
 
-也可以配置自己的tomcat和jdk
-自己的tomcat配置处（Preferences -> MyEclipse -> Servers -> Tomcat -> Tomcat 6.x）
-自己的jdk配置处（Preferences -> MyEclipse -> Servers -> Tomcat -> Tomcat 6.x -> JDK）
+```
+//mysql的分页，要的是行号和要查询的行数，一个初始行号,从0开始，一个行数，即页面大小
+//oracle的分页，是要的2个行号，一个初始行号，从1开始，一个结束行号
 ```
 
 ```
 注意事项：
 - 偶发：由于git不允许上传空文件夹，导入myeclipse的时候，自行在根目录下创建一个src目录
-- 如果配置自己的tomcat和jdk,确保使用的tomcat和jdk都是64位的，如果位数不同，会报错！
 ```
-
 ## 访问路径
 
 ```
@@ -39,7 +38,7 @@ http://localhost:8080/fenye/emp_list_controller.jsp
 ## 功能
 
 ```
-有分页组件，有模糊查询，可以连oracle，可以连mysql
+有分页组件，可以连oracle，可以连mysql
 ```
 
 
