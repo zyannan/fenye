@@ -4,6 +4,7 @@ a{color:#666; text-decoration:none;}
 </style>
 <script language="javascript">
 	function goPage(num){
+		
 		var maxPageNum = document.getElementById("maxPageNum").innerHTML;		
 		if(num>maxPageNum || num<1){
 			return false;
@@ -12,7 +13,7 @@ a{color:#666; text-decoration:none;}
 		if(num==cp){
 			return false;
 		}
-		//如果那个select里面，option没有那个值，就赋值不了那个，那就不会传值，也就是name=cp这个input，相当于被disabled了
+		
 		document.getElementById("cp").value = num ; 
 		query();
 	}
@@ -26,7 +27,7 @@ a{color:#666; text-decoration:none;}
 	int ps = Integer.parseInt(request.getParameter("ps")) ; ;		// 页面大小
 	int count = Integer.parseInt(request.getParameter("count")) ;  	// 一共有多少条数据
 	
-	int maxPageNum = (count + ps -1) / ps ;// 最大的页号
+	int maxPageNum = (count + ps -1) / ps ;							// 最大的页号
 %>
 <div style="width:60%;" align="right">
 	共找到符合条件的数据<%=count %>条&nbsp;
@@ -47,10 +48,9 @@ a{color:#666; text-decoration:none;}
 	</a>&nbsp;
 	
 	跳转到第
-		<select id="cp" name="cp" onchange="javascript:this.form.submit();">
-				<option value="1" <%=1==cp?"selected":""%>>1</option>
+		<select id="cp" name="cp" onchange="query()">
 		<%
-			for(int i=2;i<=maxPageNum;i++){
+			for(int i=1;i<=maxPageNum;i++){
 		%>
 				<option value="<%=i%>" <%=i==cp?"selected":""%>><%=i%></option>
 		<%
