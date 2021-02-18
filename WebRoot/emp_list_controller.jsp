@@ -67,24 +67,18 @@
 	pstmt.setInt(2,param2) ;
 	rs = pstmt.executeQuery() ;
 	
-	dataSql= dataSql.replace("?","%d");
+	dataSql= dataSql.replace("%","%%").replace("?","%s");
 	dataSql= String.format(dataSql,param1,param2);
 	System.out.println(dataSql);
 
 	while(rs.next()){
 		HashMap<String,String> map = new HashMap<String,String>();
-		int empno = rs.getInt(1) ;
-		String ename = rs.getString(2) ;
-		String job = rs.getString(3) ;
-		Date hiredate = rs.getDate(4) ;
-		double sal = rs.getDouble(5) ;
-		double comm = rs.getDouble(6) ;
-		map.put("empno",String.valueOf(empno));
-		map.put("ename",String.valueOf(ename));
-		map.put("job",String.valueOf(job));
-		map.put("hiredate",String.valueOf(hiredate));
-		map.put("sal",String.valueOf(sal));
-		map.put("comm",String.valueOf(comm));
+		map.put("empno",String.valueOf(rs.getInt(1)));
+		map.put("ename",String.valueOf(rs.getString(2)));
+		map.put("job",String.valueOf(rs.getString(3)));
+		map.put("hiredate",String.valueOf(rs.getDate(4)));
+		map.put("sal",String.valueOf(rs.getDouble(5)));
+		map.put("comm",String.valueOf(rs.getDouble(6)));
 		dataList.add(map);
 	}
 	conn.close() ;	

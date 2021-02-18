@@ -3,16 +3,9 @@
 <%@ page import="java.util.List,java.util.ArrayList,java.util.Map,java.util.HashMap" %>
 <html>
 <head><title>前端</title>
-<style type="text/css">
-.tablecontent{width:60%; border-collapse:collapse;}
-.tablecontent td{padding:5px; font-size:12px; text-align:center;border-bottom:1px solid #e0e0e0;}
-.tablecontent thead td{background:#f2f2f2; font-size:13px; padding:6px; border:1px solid #e0e0e0;}
-.even{background:#edf6fe;}
-.sreach{background:url(images/seachBG.jpg) repeat-x 0 bottom; width:60%; padding:0 0 20px; margin-top:10px; margin-bottom:30px; }
-</style>
+<link rel="stylesheet" href="main.css" />
 <script language="javascript">
 	function query(){
-		//向后台传cp、ps
 		document.spform.submit() ;	 
 	}
 </script>

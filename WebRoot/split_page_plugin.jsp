@@ -49,8 +49,9 @@ a{color:#666; text-decoration:none;}
 	
 	Ìø×ªµ½µÚ
 		<select id="cp" name="cp" onchange="query()">
+			<option value="1" <%=1==cp?"selected":""%>>1</option>
 		<%
-			for(int i=1;i<=maxPageNum;i++){
+			for(int i=2;i<=maxPageNum;i++){
 		%>
 				<option value="<%=i%>" <%=i==cp?"selected":""%>><%=i%></option>
 		<%
