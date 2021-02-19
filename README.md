@@ -33,14 +33,15 @@ jdk就用myeclipse自带的就可以，我这里默认是Sun JDK 1.6.0_13
 ## 访问路径
 
 ```
-http://localhost:8080/fenye/emp_list_controller.jsp
+http://localhost:8080/fenye/fenye_controller.jsp
+http://localhost:8080/fenye/search_fenye_controller.jsp
 ```
 
 
 ## 功能
 
 ```
-有分页组件，可以连oracle，可以连mysql
+有分页组件，有模糊查询，可以连oracle，可以连mysql
 ```
 
 

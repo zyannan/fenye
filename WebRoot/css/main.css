@@ -2,6 +2,6 @@
 .tablecontent td{padding:5px; font-size:12px; text-align:center;border-bottom:1px solid #e0e0e0;}
 .tablecontent thead td{background:#f2f2f2; font-size:13px; padding:6px; border:1px solid #e0e0e0;}
 .even{background:#edf6fe;}
-.sreach{background:url(images/seachBG.jpg) repeat-x 0 bottom; width:60%; padding:0 0 20px; margin-top:10px; margin-bottom:30px; }
+.sreach{background:url(../images/seachBG.jpg) repeat-x 0 bottom; width:60%; padding:0 0 20px; margin-top:10px; margin-bottom:30px; }
 .ttt{width:60%; border-collapse:collapse;}
 .ttt td{padding:5px; font-size:12px; text-align:center;}
