@@ -10,9 +10,9 @@
 <%
 	int cp = Integer.parseInt(request.getParameter("cp")==null?"1":request.getParameter("cp")) ;
 	int ps = Integer.parseInt(request.getParameter("ps")==null?"3":request.getParameter("ps")) ;
-	String ename = request.getParameter("ename")==null?"":request.getParameter("ename");
-	String job = request.getParameter("job")==null?"":request.getParameter("job");
-
+	String ename = request.getParameter("ename")==null?"":request.getParameter("ename").trim();
+	String job = request.getParameter("job")==null?"":request.getParameter("job").trim();
+	
 
 	Properties pro = new Properties();  
 	String realpath = request.getRealPath("/");  
@@ -34,11 +34,9 @@
 	Integer count= null;
 	String countSql = "SELECT COUNT(empno) FROM emp where 1=1 " ;
 	if(!ename.equals("")){
-		ename =ename.trim();
 		countSql += " and upper(ename) like upper('%"+ename+"%')";
 	}
 	if(!job.equals("")){
-		job =job.trim();
 		countSql += " and upper(job) like upper('%"+job+"%')";
 	}
 	pstmt = conn.prepareStatement(countSql) ;
@@ -57,11 +55,9 @@
 		//mysql·ÖÒ³sql
 		dataSql = "select empno,ename,job,hiredate,sal,comm from emp where 1=1";
 		if(!ename.equals("")){
-			ename =ename.trim();
 			dataSql += " and upper(ename) like upper('%"+ename+"%')";
 		}
 		if(!job.equals("")){
-			job =job.trim();
 			dataSql += " and upper(job) like upper('%"+job+"%')";
 		}
 		dataSql += " limit ?,?";
@@ -74,11 +70,9 @@
 		" SELECT empno,ename,job,hiredate,sal,comm,ROWNUM rn" +
 		" FROM emp WHERE ROWNUM<=?";
 		if(!ename.equals("")){
-			ename =ename.trim();
 			dataSql += " and upper(ename) like upper('%"+ename+"%')";
 		}
 		if(!job.equals("")){
-			job =job.trim();
 			dataSql += " and upper(job) like upper('%"+job+"%')";
 		}
 		dataSql += 
